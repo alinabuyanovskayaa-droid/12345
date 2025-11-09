@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Маршрут потерян</title>
+<style>
+:root {
+  --green: #3A7D44;
+  --grey: #6B8F82;
+  --amber: #FF9F1C;
+  --light: #F8F9FA;
+  --text: #212529;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif;}
+body{
+  background: var(--light);
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+  color:var(--text);
+}
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 40px;
+  background:rgba(255,255,255,0.85);
+  backdrop-filter:blur(6px);
+  position:sticky;
+  top:0;
+}
+.logo{
+  font-size:20px;
+  font-weight:700;
+  color:var(--green);
+}
+nav a{
+  margin-left:25px;
+  text-decoration:none;
+  color:var(--text);
+  font-weight:500;
+}
+nav a:hover{color:var(--green);} 
+main{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:40px;
+}
+.container{
+  display:flex;
+  gap:40px;
+  max-width:1000px;
+  width:100%;
+  align-items:center;
+}
+.text-block{
+  flex:1;
+}
+.text-block h1{font-size:48px;margin-bottom:15px;color:var(--green);} 
+.text-block p{margin-bottom:10px;line-height:1.5;} 
+.btn{
+  display:inline-block;
+  margin-top:20px;
+  background:var(--green);
+  color:white;
+  padding:12px 22px;
+  text-decoration:none;
+  border-radius:8px;
+  font-weight:600;
+}
+.btn:hover{background:var(--amber);} 
+.image-block{
+  flex:1;
+  display:flex;
+  justify-content:center;
+}
+.image-block img{
+  max-width:90%;
+  height:auto;
+}
+footer{
+  text-align:center;
+  padding:20px;
+  font-size:14px;
+  color:var(--grey);
+}
+@media(max-width:768px){
+  .container{flex-direction:column;text-align:center;}
+  nav{display:none;}
+  .text-block h1{font-size:36px;}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">EcoTours</div>
+  <nav>
+    <a href="#">Главная</a>
+    <a href="#">Экскурсии</a>
+    <a href="#">О нас</a>
+    <a href="#">Контакты</a>
+  </nav>
+</header>
+<main>
+  <div class="container">
+    <div class="image-block">
+      <!-- Забавный турист с картой (placeholder) -->
+      <img src="image.png" alt="Lost Tourist" width="250", height="250">
+    </div>
+    <div class="text-block">
+      <h1>Ой... Маршрут потерян 🧭</h1>
+      <p>Похоже, вы свернули не туда. Такой страницы больше нет или она изменила маршрут.</p>
+      <p>Что можно сделать:</p>
+      <p>• Проверьте адрес ссылки<br>
+      • Вернитесь на главную страницу<br>
+      • Используйте меню сайта для навигации</p>
+      <a href="/" class="btn">Вернуться на главную</a>
+    </div>
+  </div>
+</main>
+<footer>
+  EcoTours © 2025 — Путешествуйте правильно
+</footer>
+</body>
+</html>
