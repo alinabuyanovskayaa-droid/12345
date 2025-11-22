@@ -1,128 +1,484 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>404 — Маршрут потерян</title>
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Экскурсии — Бронирование</title>
+    <link rel="stylesheet" href="style.css">
+    <style>/* ---------- Цветовая палитра ---------- */
 :root {
-  --green: #3A7D44;
-  --grey: #6B8F82;
-  --amber: #FF9F1C;
-  --light: #F8F9FA;
-  --text: #212529;
+    --green-main: #3A7D44;
+    --gray-secondary: #6B8F82;
+    --amber: #FF9F1C;
+    --bg: #F8F9FA;
+    --text: #212529;
 }
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif;}
-body{
-  background: var(--light);
-  display:flex;
-  flex-direction:column;
-  min-height:100vh;
-  color:var(--text);
+
+body {
+    margin: 0;
+    font-family: "Inter", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
 }
-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:20px 40px;
-  background:rgba(255,255,255,0.85);
-  backdrop-filter:blur(6px);
-  position:sticky;
-  top:0;
+
+.container {
+    width: 92%;
+    max-width: 1200px;
+    margin: auto;
 }
-.logo{
-  font-size:20px;
-  font-weight:700;
-  color:var(--green);
+
+/* ---------- HEADER ---------- */
+.header {
+    background: white;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
-nav a{
-  margin-left:25px;
-  text-decoration:none;
-  color:var(--text);
-  font-weight:500;
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-nav a:hover{color:var(--green);} 
-main{
-  flex:1;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:40px;
+
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--green-main);
 }
-.container{
-  display:flex;
-  gap:40px;
-  max-width:1000px;
-  width:100%;
-  align-items:center;
+
+.nav {
+    display: flex;
+    gap: 20px;
 }
-.text-block{
-  flex:1;
+
+.nav a {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 500;
+    font-size: 16px;
 }
-.text-block h1{font-size:48px;margin-bottom:15px;color:var(--green);} 
-.text-block p{margin-bottom:10px;line-height:1.5;} 
-.btn{
-  display:inline-block;
-  margin-top:20px;
-  background:var(--green);
-  color:white;
-  padding:12px 22px;
-  text-decoration:none;
-  border-radius:8px;
-  font-weight:600;
+
+/* ---------- BUTTONS ---------- */
+.btn-main,
+.btn-secondary {
+    padding: 12px 22px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    border: none;
 }
-.btn:hover{background:var(--amber);} 
-.image-block{
-  flex:1;
-  display:flex;
-  justify-content:center;
+
+.btn-main {
+    background: var(--green-main);
+    color: white;
 }
-.image-block img{
-  max-width:90%;
-  height:auto;
+
+.btn-main:hover {
+    background: #2c6033;
 }
-footer{
-  text-align:center;
-  padding:20px;
-  font-size:14px;
-  color:var(--grey);
+
+.btn-secondary {
+    background: var(--gray-secondary);
+    color: white;
 }
-@media(max-width:768px){
-  .container{flex-direction:column;text-align:center;}
-  nav{display:none;}
-  .text-block h1{font-size:36px;}
+
+/* ---------- HERO ---------- */
+.hero {
+    background: url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80") center/cover;
+    padding: 120px 0;
+    color: white;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+}
+
+.hero-content h1 {
+    font-size: clamp(28px, 5vw, 46px);
+}
+
+.hero-content p {
+    font-size: clamp(14px, 2.5vw, 18px);
+}
+
+/* ---------- SEARCH BOX ---------- */
+.search-box {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+}
+
+/* ---------- FILTERS ---------- */
+.filters {
+    position: sticky;
+    top: 70px;
+    background: var(--bg);
+    padding: 15px 0;
+    border-bottom: 1px solid #e4e4e4;
+    z-index: 9;
+}
+
+.filter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+}
+
+.filter-grid select,
+.filter-grid button {
+    padding: 12px;
+    font-size: 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+/* ---------- CARDS ---------- */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+}
+
+.card img {
+    width: 100%;
+    height: clamp(160px, 25vw, 220px);
+    object-fit: cover;
+}
+
+/* Badge */
+.badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: var(--amber);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.card-info {
+    padding: 18px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-info h3 {
+    font-size: clamp(18px, 2.8vw, 22px);
+    margin-bottom: 8px;
+}
+
+.card-info p {
+    font-size: clamp(14px, 2.4vw, 16px);
+    flex: 1;
+}
+
+.rating {
+    color: var(--green-main);
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.details {
+    font-size: 14px;
+    margin: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.price {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    margin-bottom: 15px;
+}
+
+.price .new {
+    color: var(--amber);
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.price .old {
+    color: #999;
+    text-decoration: line-through;
+}
+
+/* Full width button in card */
+.full {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+}
+
+/* ---------- FOOTER ---------- */
+.footer {
+    margin-top: 60px;
+    background: var(--gray-secondary);
+    padding: 22px;
+    text-align: center;
+    color: white;
+    font-size: 15px;
+}
+
+/* =========== АДАПТИВНОСТЬ (МЕДИА-ЗАПРОСЫ) =========== */
+
+/* ---- Планшет ---- */
+@media (max-width: 900px) {
+    .nav {
+        display: none; /* можно заменить бургер-меню */
+    }
+
+    .header-content {
+        justify-content: space-between;
+    }
+
+    .search-box {
+        flex-direction: column;
+    }
+
+    .hero {
+        padding: 80px 0;
+    }
+}
+
+/* ---- Телефон ---- */
+@media (max-width: 600px) {
+    .filters {
+        top: 60px;
+    }
+
+    .filter-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .card img {
+        height: 180px;
+    }
+
+    .full {
+        font-size: 15px;
+        padding: 10px;
+    }
+
+    .btn-main,
+    .btn-secondary {
+        padding: 10px 18px;
+        font-size: 15px;
+        border-radius: 8px;
+    }
+}
+
+/* ---- Очень маленькие экраны ---- */
+@media (max-width: 400px) {
+    .filter-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        padding: 60px 0;
+    }
 }
 </style>
 </head>
 <body>
-<header>
-  <div class="logo">EcoTours</div>
-  <nav>
-    <a href="#">Главная</a>
-    <a href="#">Экскурсии</a>
-    <a href="#">О нас</a>
-    <a href="#">Контакты</a>
-  </nav>
+
+<header class="header">
+    <div class="container header-content">
+        <div class="logo">ExploreBy</div>
+
+        <nav class="nav">
+            <a href="#">Главная</a>
+            <a href="#">Экскурсии</a>
+            <a href="#">О нас</a>
+            <a href="#">Контакты</a>
+        </nav>
+
+        <button class="btn-main">Войти</button>
+    </div>
 </header>
-<main>
-  <div class="container">
-    <div class="image-block">
-      <!-- Забавный турист с картой (placeholder) -->
-      <img src="image.png" alt="Lost Tourist" width="250", height="250">
+
+
+<section class="hero">
+    <div class="hero-content container">
+        <h1>Найдите идеальную экскурсию</h1>
+        <p>Откройте новые места и получите яркие эмоции вместе с нашим сервисом бронирования.</p>
+
+        <div class="search-box">
+            <input type="text" placeholder="Поиск экскурсий...">
+            <button class="btn-main">Найти</button>
+        </div>
     </div>
-    <div class="text-block">
-      <h1>Ой... Маршрут потерян 🧭</h1>
-      <p>Похоже, вы свернули не туда. Такой страницы больше нет или она изменила маршрут.</p>
-      <p>Что можно сделать:</p>
-      <p>• Проверьте адрес ссылки<br>
-      • Вернитесь на главную страницу<br>
-      • Используйте меню сайта для навигации</p>
-      <a href="/" class="btn">Вернуться на главную</a>
+</section>
+
+
+<!-- ===== ФИЛЬТРЫ ===== -->
+<section class="filters">
+    <div class="container filter-grid">
+
+        <select>
+            <option>Категория</option>
+            <option>История</option>
+            <option>Природа</option>
+            <option>Замки</option>
+            <option>Пешеходные</option>
+        </select>
+
+        <select>
+            <option>Цена</option>
+            <option>До 30 BYN</option>
+            <option>30–60 BYN</option>
+            <option>60–100 BYN</option>
+            <option>100+ BYN</option>
+        </select>
+
+        <select>
+            <option>Длительность</option>
+            <option>1 час</option>
+            <option>2–3 часа</option>
+            <option>4–6 часов</option>
+            <option>Целый день</option>
+        </select>
+
+        <select>
+            <option>Рейтинг</option>
+            <option>4★ и выше</option>
+            <option>4.5★ и выше</option>
+            <option>Только ТОП</option>
+        </select>
+
+        <button class="btn-secondary">Сбросить</button>
     </div>
-  </div>
-</main>
-<footer>
-  EcoTours © 2025 — Путешествуйте правильно
+</section>
+
+
+
+<section class="popular container">
+    <h2>Популярные экскурсии</h2>
+
+    <div class="cards">
+
+        <!-- CARD 1 -->
+        <div class="card">
+            <div class="badge">ТОП</div>
+            <img src="https://images.unsplash.com/photo-1508264165352-258a6b0bf3af" alt="">
+
+            <div class="card-info">
+                <h3>Прогулка по старому городу</h3>
+
+                <div class="rating">⭐ 4.8</div>
+
+                <p>
+                    Увлекательная экскурсия с профессиональным гидом по историческому центру.
+                </p>
+
+                <div class="details">
+                    <span>⏱ 2 часа</span>
+                    <span>👣 Пешеходная</span>
+                </div>
+
+                <div class="price">
+                    <span class="new">49 BYN</span>
+                    <span class="old">59 BYN</span>
+                </div>
+
+                <button class="btn-main full">Забронировать</button>
+            </div>
+        </div>
+
+
+        <!-- CARD 2 -->
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee" alt="">
+
+            <div class="card-info">
+                <h3>Замки Беларуси</h3>
+
+                <div class="rating">⭐ 4.6</div>
+
+                <p>
+                    Путешествие по самым красивым и величественным замкам страны.
+                </p>
+
+                <div class="details">
+                    <span>⏱ 6 часов</span>
+                    <span>🚌 Автобусная</span>
+                </div>
+
+                <div class="price">
+                    <span class="new">79 BYN</span>
+                </div>
+
+                <button class="btn-main full">Забронировать</button>
+            </div>
+        </div>
+
+
+        <!-- CARD 3 -->
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1472396961693-142e6e269027" alt="">
+
+            <div class="card-info">
+                <h3>Природный заповедник</h3>
+
+                <div class="rating">⭐ 4.9</div>
+
+                <p>
+                    Отдых на природе и знакомство с уникальной флорой и фауной.
+                </p>
+
+                <div class="details">
+                    <span>⏱ 4 часа</span>
+                    <span>🌿 Природа</span>
+                </div>
+
+                <div class="price">
+                    <span class="new">65 BYN</span>
+                </div>
+
+                <button class="btn-main full">Забронировать</button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<footer class="footer">
+    <div class="container">
+        <p>© 2025 ExploreBy — сервис бронирования экскурсий</p>
+    </div>
 </footer>
+
 </body>
 </html>
