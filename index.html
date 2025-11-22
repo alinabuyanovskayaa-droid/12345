@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Экскурсии — Бронирование</title>
-    <link rel="stylesheet" href="style.css">
-    <style>/* ---------- Цветовая палитра ---------- */
+    <title>Авторизация — ExploreBy</title>
+
+    <style>
+/* ---------- Цветовая палитра (как у главной) ---------- */
 :root {
     --green-main: #3A7D44;
     --gray-secondary: #6B8F82;
@@ -32,9 +33,6 @@ body {
     background: white;
     border-bottom: 1px solid #e0e0e0;
     padding: 12px 0;
-    position: sticky;
-    top: 0;
-    z-index: 10;
 }
 
 .header-content {
@@ -57,184 +55,88 @@ body {
 .nav a {
     text-decoration: none;
     color: var(--text);
+    font-size: 16px;
     font-weight: 500;
-    font-size: 16px;
-}
-
-/* ---------- BUTTONS ---------- */
-.btn-main,
-.btn-secondary {
-    padding: 12px 22px;
-    font-size: 16px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: 0.3s;
-    border: none;
 }
 
 .btn-main {
+    padding: 10px 20px;
     background: var(--green-main);
     color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
 .btn-main:hover {
     background: #2c6033;
 }
 
-.btn-secondary {
-    background: var(--gray-secondary);
-    color: white;
-}
-
-/* ---------- HERO ---------- */
-.hero {
-    background: url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80") center/cover;
-    padding: 120px 0;
-    color: white;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.4);
-}
-
-.hero-content h1 {
-    font-size: clamp(28px, 5vw, 46px);
-}
-
-.hero-content p {
-    font-size: clamp(14px, 2.5vw, 18px);
-}
-
-/* ---------- SEARCH BOX ---------- */
-.search-box {
-    margin-top: 20px;
+/* ---------- AUTH WRAPPER ---------- */
+.auth-wrapper {
+    padding: 60px 0;
     display: flex;
-    gap: 10px;
+    justify-content: center;
 }
 
-.search-box input {
-    flex: 1;
-    padding: 14px;
-    border-radius: 10px;
-    border: none;
-    font-size: 16px;
+.auth-card {
+    background: white;
+    width: 100%;
+    max-width: 450px;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    animation: fadeIn 0.3s ease;
 }
 
-/* ---------- FILTERS ---------- */
-.filters {
-    position: sticky;
-    top: 70px;
-    background: var(--bg);
-    padding: 15px 0;
-    border-bottom: 1px solid #e4e4e4;
-    z-index: 9;
+h2 {
+    margin-top: 0;
+    font-size: 28px;
 }
 
-.filter-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 15px;
-}
-
-.filter-grid select,
-.filter-grid button {
-    padding: 12px;
+.subtitle {
+    margin-top: -10px;
+    margin-bottom: 20px;
     font-size: 15px;
+    color: #555;
+}
+
+/* ---------- FORM ---------- */
+.input-group {
+    margin-bottom: 18px;
+}
+
+.input-group label {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
     border-radius: 10px;
     border: 1px solid #ccc;
+    margin-top: 6px;
+    font-size: 15px;
 }
 
-/* ---------- CARDS ---------- */
-.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 25px;
+.input-group small {
+    font-size: 12px;
+    color: var(--gray-secondary);
 }
 
-.card {
-    background: white;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-    transition: 0.3s;
-    display: flex;
-    flex-direction: column;
+/* ---------- SWITCH LINKS ---------- */
+.switch {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 15px;
 }
 
-.card:hover {
-    transform: translateY(-6px);
-}
-
-.card img {
-    width: 100%;
-    height: clamp(160px, 25vw, 220px);
-    object-fit: cover;
-}
-
-/* Badge */
-.badge {
-    position: absolute;
-    top: 14px;
-    left: 14px;
-    background: var(--amber);
-    color: white;
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 14px;
-}
-
-.card-info {
-    padding: 18px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.card-info h3 {
-    font-size: clamp(18px, 2.8vw, 22px);
-    margin-bottom: 8px;
-}
-
-.card-info p {
-    font-size: clamp(14px, 2.4vw, 16px);
-    flex: 1;
-}
-
-.rating {
+.switch a {
     color: var(--green-main);
-    font-weight: 600;
-    margin-bottom: 8px;
-}
-
-.details {
-    font-size: 14px;
-    margin: 10px 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-}
-
-.price {
-    display: flex;
-    gap: 12px;
-    align-items: baseline;
-    margin-bottom: 15px;
-}
-
-.price .new {
-    color: var(--amber);
-    font-size: 20px;
-    font-weight: 700;
-}
-
-.price .old {
-    color: #999;
-    text-decoration: line-through;
-}
-
-/* Full width button in card */
-.full {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
+    text-decoration: none;
 }
 
 /* ---------- FOOTER ---------- */
@@ -247,78 +149,34 @@ body {
     font-size: 15px;
 }
 
-/* =========== АДАПТИВНОСТЬ (МЕДИА-ЗАПРОСЫ) =========== */
-
-/* ---- Планшет ---- */
-@media (max-width: 900px) {
-    .nav {
-        display: none; /* можно заменить бургер-меню */
-    }
-
-    .header-content {
-        justify-content: space-between;
-    }
-
-    .search-box {
-        flex-direction: column;
-    }
-
-    .hero {
-        padding: 80px 0;
-    }
+/* ---------- ANIMATION ---------- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* ---- Телефон ---- */
+/* ---------- MOBILE RESPONSIVE ---------- */
 @media (max-width: 600px) {
-    .filters {
-        top: 60px;
+    .auth-card {
+        padding: 22px;
     }
-
-    .filter-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .cards {
-        grid-template-columns: 1fr;
-    }
-
-    .card img {
-        height: 180px;
-    }
-
-    .full {
-        font-size: 15px;
-        padding: 10px;
-    }
-
-    .btn-main,
-    .btn-secondary {
-        padding: 10px 18px;
-        font-size: 15px;
-        border-radius: 8px;
-    }
+    .nav { display: none; }
 }
 
-/* ---- Очень маленькие экраны ---- */
-@media (max-width: 400px) {
-    .filter-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .hero {
-        padding: 60px 0;
-    }
+.hidden {
+    display: none;
 }
-</style>
+    </style>
 </head>
 <body>
 
+<!-- ШАПКА -->
 <header class="header">
     <div class="container header-content">
         <div class="logo">ExploreBy</div>
 
         <nav class="nav">
-            <a href="#">Главная</a>
+            <a href="index.html">Главная</a>
             <a href="#">Экскурсии</a>
             <a href="#">О нас</a>
             <a href="#">Контакты</a>
@@ -329,156 +187,96 @@ body {
 </header>
 
 
-<section class="hero">
-    <div class="hero-content container">
-        <h1>Найдите идеальную экскурсию</h1>
-        <p>Откройте новые места и получите яркие эмоции вместе с нашим сервисом бронирования.</p>
+<!-- === АВТОРИЗАЦИЯ === -->
+<section class="auth-wrapper">
+    <div class="auth-card" id="login-card">
+        <h2>Авторизация</h2>
+        <p class="subtitle">Войдите, чтобы продолжить бронирование экскурсий.</p>
 
-        <div class="search-box">
-            <input type="text" placeholder="Поиск экскурсий...">
-            <button class="btn-main">Найти</button>
+        <form>
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" placeholder="Введите email" required>
+            </div>
+
+            <div class="input-group">
+                <label>Пароль</label>
+                <input type="password" placeholder="Введите пароль" required>
+            </div>
+
+            <button class="btn-main" style="width: 100%;">Войти</button>
+        </form>
+
+        <div class="switch">
+            Нет аккаунта? <a href="#" id="go-register">Зарегистрироваться</a>
+        </div>
+    </div>
+
+
+
+    <!-- === РЕГИСТРАЦИЯ === -->
+    <div class="auth-card hidden" id="register-card">
+        <h2>Регистрация</h2>
+        <p class="subtitle">Создайте аккаунт, чтобы бронировать экскурсии.</p>
+
+        <form>
+
+            <div class="input-group">
+                <label>ФИО</label>
+                <input type="text" placeholder="Введите ФИО" required>
+            </div>
+
+            <div class="input-group">
+                <label>Дата рождения</label>
+                <input type="date" required>
+            </div>
+
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" placeholder="Введите email" required>
+            </div>
+
+            <div class="input-group">
+                <label>Телефон</label>
+                <input type="tel" placeholder="+375 (__) ___-__-__" required>
+            </div>
+
+            <div class="input-group">
+                <label>Пароль</label>
+                <input type="password" placeholder="Создайте пароль" required>
+            </div>
+
+            <button class="btn-main" style="width: 100%;">Зарегистрироваться</button>
+        </form>
+
+        <div class="switch">
+            Уже есть аккаунт? <a href="#" id="go-login">Войти</a>
         </div>
     </div>
 </section>
 
 
-<!-- ===== ФИЛЬТРЫ ===== -->
-<section class="filters">
-    <div class="container filter-grid">
-
-        <select>
-            <option>Категория</option>
-            <option>История</option>
-            <option>Природа</option>
-            <option>Замки</option>
-            <option>Пешеходные</option>
-        </select>
-
-        <select>
-            <option>Цена</option>
-            <option>До 30 BYN</option>
-            <option>30–60 BYN</option>
-            <option>60–100 BYN</option>
-            <option>100+ BYN</option>
-        </select>
-
-        <select>
-            <option>Длительность</option>
-            <option>1 час</option>
-            <option>2–3 часа</option>
-            <option>4–6 часов</option>
-            <option>Целый день</option>
-        </select>
-
-        <select>
-            <option>Рейтинг</option>
-            <option>4★ и выше</option>
-            <option>4.5★ и выше</option>
-            <option>Только ТОП</option>
-        </select>
-
-        <button class="btn-secondary">Сбросить</button>
-    </div>
-</section>
-
-
-
-<section class="popular container">
-    <h2>Популярные экскурсии</h2>
-
-    <div class="cards">
-
-        <!-- CARD 1 -->
-        <div class="card">
-            <div class="badge">ТОП</div>
-            <img src="https://images.unsplash.com/photo-1508264165352-258a6b0bf3af" alt="">
-
-            <div class="card-info">
-                <h3>Прогулка по старому городу</h3>
-
-                <div class="rating">⭐ 4.8</div>
-
-                <p>
-                    Увлекательная экскурсия с профессиональным гидом по историческому центру.
-                </p>
-
-                <div class="details">
-                    <span>⏱ 2 часа</span>
-                    <span>👣 Пешеходная</span>
-                </div>
-
-                <div class="price">
-                    <span class="new">49 BYN</span>
-                    <span class="old">59 BYN</span>
-                </div>
-
-                <button class="btn-main full">Забронировать</button>
-            </div>
-        </div>
-
-
-        <!-- CARD 2 -->
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee" alt="">
-
-            <div class="card-info">
-                <h3>Замки Беларуси</h3>
-
-                <div class="rating">⭐ 4.6</div>
-
-                <p>
-                    Путешествие по самым красивым и величественным замкам страны.
-                </p>
-
-                <div class="details">
-                    <span>⏱ 6 часов</span>
-                    <span>🚌 Автобусная</span>
-                </div>
-
-                <div class="price">
-                    <span class="new">79 BYN</span>
-                </div>
-
-                <button class="btn-main full">Забронировать</button>
-            </div>
-        </div>
-
-
-        <!-- CARD 3 -->
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1472396961693-142e6e269027" alt="">
-
-            <div class="card-info">
-                <h3>Природный заповедник</h3>
-
-                <div class="rating">⭐ 4.9</div>
-
-                <p>
-                    Отдых на природе и знакомство с уникальной флорой и фауной.
-                </p>
-
-                <div class="details">
-                    <span>⏱ 4 часа</span>
-                    <span>🌿 Природа</span>
-                </div>
-
-                <div class="price">
-                    <span class="new">65 BYN</span>
-                </div>
-
-                <button class="btn-main full">Забронировать</button>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-
+<!-- ФУТЕР -->
 <footer class="footer">
-    <div class="container">
-        <p>© 2025 ExploreBy — сервис бронирования экскурсий</p>
-    </div>
+    © 2025 ExploreBy — сервис бронирования экскурсий
 </footer>
+
+
+<script>
+/* Переключение форм */
+const loginCard = document.getElementById("login-card");
+const regCard = document.getElementById("register-card");
+
+document.getElementById("go-register").onclick = () => {
+    loginCard.classList.add("hidden");
+    regCard.classList.remove("hidden");
+};
+
+document.getElementById("go-login").onclick = () => {
+    regCard.classList.add("hidden");
+    loginCard.classList.remove("hidden");
+};
+</script>
 
 </body>
 </html>
